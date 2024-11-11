@@ -6,6 +6,7 @@ import Footer from "./Footer";
 import CardTiposDePagamentos from "./CardTiposDePagamentos";
 import InputPagamento from "../components/Inputs/InputPagamento";
 
+
 export default function PagamentoEmpresa() {
   const { id } = useParams();
   const [plano, setPlano] = useState({});
@@ -15,7 +16,7 @@ export default function PagamentoEmpresa() {
 
   async function mostrar() {
     try {
-      const dados = await axios.get(`http://localhost:8000/planoempresa/${id}`);
+      const dados = await axios.get(process.env.URL + "planoempresa" + "/" + id);
       setPlano(dados.data);
     } catch (erro) {
       console.log(erro);

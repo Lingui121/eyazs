@@ -10,7 +10,7 @@ export default function PlanosResidenciais() {
 
     async function mostrarCards() {
         try {
-            const planosresidenciais = await axios.get("http://localhost:8000/planos")
+            const planosresidenciais = await axios.get( process.env.URL + "planos")
             if (planosresidenciais.data[0]) {
                 setPlanosResidencia([...planosresidenciais.data])
                 console.log("Dados State: " + planosResidencias)

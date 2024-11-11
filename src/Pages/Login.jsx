@@ -3,6 +3,9 @@ import InputLogin from "../components/Inputs/InputLogin";
 import BotaoLogin from "../components/Botoes/BotaoLogin";
 import axios from "axios"
 import { useNavigate } from "react-router-dom";
+import dotenv from "dotenv"
+
+dotenv.config()
 
 export default function Login() {
 
@@ -16,7 +19,7 @@ export default function Login() {
 
     async function fazerLogin() {
         try {
-            const data = await axios.post("http://localhost:8000/login",
+            const data = await axios.post(process.env.URL + "login",
                 {
                     username: userName,
                     password: password

@@ -30,7 +30,7 @@ export default function PagamentoViaMpesa() {
       console.log("preco Normal: " + preco)
       console.log("preco Transformado : " + parseFloat(preco))
       console.log("")
-      const dados = await axios.put(`http://localhost:8000/pagamento/${dadosDoLocalStorage.idUsuario}`,
+      const dados = await axios.put(process.env.URL + "pagamento" + dadosDoLocalStorage.idUsuario,
         {
           transaction_ref: "EyazsImperium",
           msisdn: `258${numero}`,

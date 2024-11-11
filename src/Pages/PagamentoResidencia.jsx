@@ -16,7 +16,7 @@ export default function PagamentoResidencia() {
 
   async function mostrar() {
     try {
-      const dados = await axios.get(`http://localhost:8000/plano/${id}`);
+      const dados = await axios.get(process.env.URL+"plano/" + id);
       setPlano(dados.data);
     } catch (erro) {
       console.log(erro);
