@@ -14,7 +14,13 @@ code {
 
 @font-face {
   font-family: questrial;
-  src: url("/public/fonts/Questrial-Regular.ttf");
+  src: url("/public/fonts/Inter.ttf");
+}
+@media print {
+  .print-a5 {
+    width: 200mm;
+    height: 150mm;
+  }
 }
 
 @tailwind base;

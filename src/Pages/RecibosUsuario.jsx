@@ -2,17 +2,21 @@ import { useEffect, useState } from "react";
 import Footer from "./Footer";
 import NavBar from "./NavBar";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-export default function HistoricoPagammento() {
+export default function RecibosUsuario() {
   const [recibos, setRecibos] = useState([]);
   const navigate = useNavigate();
+  const [usuario, setUsuario] = useState("");
+  const { id } = useParams();
 
   async function mostrarRecibos() {
     try {
-      const dadosRecibo = await axios.get("http://localhost:8000/recibos");
-      if (dadosRecibo) {
+      const dadosUsuario = await axios.get(`http://localhost:8000/usuario/${id}`)
+      const dadosRecibo = await axios.get(`http://localhost:8000/recibos/${id}`);
+      if ( dadosUsuario && dadosRecibo) {
         setRecibos(dadosRecibo.data);
+        setUsuario(dadosUsuario.data.name)
       }
     } catch (erro) {
       console.log(erro);
@@ -31,7 +35,7 @@ export default function HistoricoPagammento() {
       </div>
       <div className="w-[1200px] border rounded-xl h-auto mx-auto m-12">
         <div className="flex justify-center m-4 flex-col">
-          <h2 className="mb-2 text-gray-600">Historico de Pagamento</h2>
+          <h2 className="mb-2 text-gray-600">Historico de Pagamento do Usuario <span className="uppercase font-semibold text-gray-900" >{usuario} </span> </h2>
           <table className="border border-gray-50 over w-[100%]">
             <thead className="border rounded-[50px]">
               <tr className="bg-gray-100 border rounded-lg text-gray-500">

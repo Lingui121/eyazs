@@ -30,7 +30,7 @@ export default function PagamentoViaMpesa() {
       console.log("preco Normal: " + preco)
       console.log("preco Transformado : " + parseFloat(preco))
       console.log("")
-      const dados = await axios.put(process.env.URL + "pagamento" + dadosDoLocalStorage.idUsuario,
+      const dados = await axios.put(`http://localhost:8000/pagamento/${dadosDoLocalStorage.idUsuario}`,
         {
           transaction_ref: "EyazsImperium",
           msisdn: `258${numero}`,
@@ -46,29 +46,32 @@ export default function PagamentoViaMpesa() {
     }
   }
 
-  function mostrarPlano() {
+  async function mostrarPlano() {
     try {
       const dadosDoLocalStorage = JSON.parse(localStorage.getItem("usuario"));
-      if (dadosDoLocalStorage.profile === "PLANO-3Mbps") {
+      const dadosAtuais = await axios.get(`http://localhost:8000/usuario/${dadosDoLocalStorage.idUsuario}`)
+      if (dadosDoLocalStorage.profile === "PLANO-6Mbps") {
         setPreco(2320);
-      } else if (dadosDoLocalStorage.profile === "PLANO-6Mbps") {
-        setPreco(3480);
       } else if (dadosDoLocalStorage.profile === "PLANO-8Mbps") {
-        setPreco(5800);
+        setPreco(3480);
       } else if (dadosDoLocalStorage.profile === "PLANO-10Mbps") {
-        setPreco(8120);
+        setPreco(5800);
       } else if (dadosDoLocalStorage.profile === "PLANO-12Mbps") {
-        setPreco(9628);
+        setPreco(8120);
       } else if (dadosDoLocalStorage.profile === "PLANO-14Mbps") {
-        setPreco(11948);
+        setPreco(9628);
       } else if (dadosDoLocalStorage.profile === "PLANO-16Mbps") {
-        setPreco(13688);
+        setPreco(11948);
       } else if (dadosDoLocalStorage.profile === "PLANO-18Mbps") {
+        setPreco(13688);
+      } else if (dadosDoLocalStorage.profile === "PLANO-20Mbps") {
         setPreco(14500);
       } else if (dadosDoLocalStorage.profile === "PLANO-20Mbps") {
         setPreco(16008);
+      }else if(dadosDoLocalStorage.profile === "DESATVADO"){
+        setPreco(dadosAtuais.data.precousuario)
       }
-      setProfile(dadosDoLocalStorage.profile);
+      setProfile(dadosAtuais.data.profileusuario);
     } catch (erro) {
       console.log(erro);
     }
@@ -77,7 +80,7 @@ export default function PagamentoViaMpesa() {
   const propsInputPagamentoMpesa = {
     type: "text",
     placeholder: "digite o numero do Mpesa",
-    referencia:inputRef
+    mudar: (e) => setNumero(e.target.value)
   };
 
   function pegarNumero(){
@@ -93,56 +96,60 @@ export default function PagamentoViaMpesa() {
   }, []);
 
   return (
-    <div>
-      <div className="bg-blue-500">
-        <NavBar />
+    <div className="min-h-screen flex flex-col">
+    {/* NavBar */}
+    <div className="bg-blue-500">
+      <NavBar />
+    </div>
+  
+    {/* Conteúdo Principal */}
+    <div className="flex-grow flex flex-col justify-between font-questrial">
+      {/* Título do Perfil */}
+      <div className="h-[60px] border flex items-center justify-center bg-gray-100">
+        <h2 className="font-semibold">{profile}</h2>
       </div>
-      <div className="h-full flex justify-between flex-col font-questrial">
-        <div>
-          <div className="h-[60px] border flex items-center justify-center bg-gray-100">
-            <h2 className="font-semibold"> {profile} </h2>
-          </div>
+  
+      {/* Seção de Pagamento */}
+      <div className="border sm:mx-auto sm:w-[40%] w-full md:w-[40%] lg:w-[40%] bg-gray-50 mx-auto my-6 p-6 rounded-lg shadow-md">
+        {/* Logotipo */}
+        <div className="flex justify-center mb-6">
+          <img className="w-[170px]" src="../../images/vodacom.png" alt="Vodacom" />
         </div>
-      </div>
-      <div className="border w-[26%] bg-gray-50 mx-auto m-4 ">
-        <div className="m-6">
-          <div className="flex justify-center mt-4">
-            <img className="w-[170px]" src="../../images/vodacom.png" alt="" />
-          </div>
-          <br />
-          <div className="flex justify-between w-[90%] mx-auto ">
-            <span>Total</span>
-            <span className="font-semibold">{preco} MZN</span>
-          </div>
-          <div className="w-full mt-1">
-            <InputPagamento {...propsInputPagamentoMpesa} />
-          </div>
-          <br />
-          <div>
-            <button
-              onClick={() => {
-                setNumero(inputRef.current.value)
-                recarregarPacote();
-              }}
-              className="w-full bg-blue-500 p-1 border rounded-[50px] text-gray-100"
-            >
-              Pagar
-            </button>
-          </div>
-          <br />
-          <div className="">
-            <span className="text-[11px] text-gray-400">
-              Ao clicar "Pagar", eu confirmo que li e estou de acordo{" "}
-              <Link className="text-blue-500" to="/termosdeuso">
-                com os termos e condicoes de uso
-              </Link>
-            </span>
-          </div>
+  
+        {/* Total */}
+        <div className="flex justify-between mb-4 text-lg">
+          <span>Total</span>
+          <span className="font-semibold">{preco} MZN</span>
         </div>
-      </div>
-      <div className="bg-blue-500 text-gray-200 p-1">
-        <Footer />
+  
+        {/* Input de Pagamento */}
+        <div className="w-full mb-4">
+          <InputPagamento {...propsInputPagamentoMpesa} />
+        </div>
+  
+        {/* Botão de Pagamento */}
+        <button
+          onClick={recarregarPacote}
+          className="w-full bg-blue-500 p-2 rounded-full text-white hover:bg-blue-600 transition"
+        >
+          Pagar
+        </button>
+  
+        {/* Aviso sobre termos e condições */}
+        <div className="mt-4 text-center text-sm text-gray-400">
+          Ao clicar "Pagar", eu confirmo que li e estou de acordo{" "}
+          <Link className="text-blue-500 hover:underline" to="/termosdeuso">
+            com os termos e condições de uso
+          </Link>
+        </div>
       </div>
     </div>
+  
+    {/* Footer */}
+    <div className="bg-blue-500 text-gray-200 p-2">
+      <Footer />
+    </div>
+  </div>
+  
   );
 }

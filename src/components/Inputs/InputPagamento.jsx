@@ -2,7 +2,10 @@ import React, { useRef } from 'react';
 
 const InputPagamento = (props) => {
   return (
-    <input className='w-full px-4 py-1 border rounded-[50px] ' ref={props.referencia} type={props.type} placeholder={props.placeholder}></input>
+    <input className='w-full px-4 py-1 border rounded-[50px] ' 
+    type={props.type} onChange={(e) => props.mudar(e)}
+    value={props.value}
+    placeholder={props.placeholder}/>
   );
 };
 
