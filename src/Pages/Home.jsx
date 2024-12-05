@@ -1,7 +1,7 @@
 import CardHistorico from "../components/Cards/CardHistorico";
 import CardMinhaConta from "../components/Cards/CardMinhaConta";
-import CardPagamento from "../components/Cards/CardPagamento";
 import CardPlano from "../components/Cards/CardPlano";
+import CardPagamento from "../components/Cards/CardPagamento"
 import Footer from "./Footer";
 import NavBar from "./NavBar";
 import { useNavigate } from "react-router-dom";
@@ -58,7 +58,7 @@ function Home() {
               onClick={() => navigate("/tiposdepagamentos")}
               className="w-full"
             >
-              <CardPagamento {...propsCardPagamento} />
+              < CardPagamento {...propsCardPagamento} />
             </button>
           </div>
 

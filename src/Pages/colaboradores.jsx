@@ -74,7 +74,7 @@ export default function Colaboradores() {
                   .sort((a, b) => a.name.localeCompare(b.name))
                   .map((colaborador, i) => {
                     return (
-                      <tr>
+                      <tr key={i}>
                         <td className="border text-center text-sm lowercase">
                           {" "}
                           {i + 1}{" "}

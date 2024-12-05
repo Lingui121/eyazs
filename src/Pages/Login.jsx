@@ -44,15 +44,15 @@ export default function Login() {
     <div className="w-screen h-screen flex justify-center items-center flex-col gap-4">
       {errorMessage && (
         <div
-          className={`w-screen flex justify-center border bg-red-300 text-gray-200 transition-opacity duration-500 ${
+          className={`w-1/2 flex justify-center border bg-red-300 text-gray-200 transition-opacity duration-500 ${
             showError ? "opacity-100" : "opacity-0"
           }`}
         >
           <span className="py-3 text-xl">{errorMessage}</span>
         </div>
       )}
-      <div className="">
-        <div className=" border w-[380px] h-[400px] rounded-[50px] border-blue-500 ">
+      <div className="w-[380px] flex justify-center">
+        <div className=" border w-[70%] md:w-[80%] lg:w-full h-[400px] rounded-[50px] border-blue-500 ">
           <div className="flex justify-center items-center h-full">
             <div>
               <div className=" -mt-[20px] mx-auto w-[30%] m-3 flex justify-center border rounded-[50%] border-blue-700 py-2">
