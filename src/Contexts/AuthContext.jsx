@@ -18,7 +18,7 @@ export function AuthProvider({ children }) {
   // Função para login
   async function fazerLogin(username, password) {
     try {
-      const data = await axios.post("http://localhost:8000/login", {
+      const data = await axios.post("https://api-eyazs-production.up.railway.app/login", {
         username: username,
         password: password,
       });

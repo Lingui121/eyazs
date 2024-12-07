@@ -30,7 +30,7 @@ export default function PagamentoViaMpesa() {
       console.log("preco Normal: " + preco)
       console.log("preco Transformado : " + parseFloat(preco))
       console.log("")
-      const dados = await axios.put(`http://localhost:8000/pagamento/${dadosDoLocalStorage.idUsuario}`,
+      const dados = await axios.put(`https://api-eyazs-production.up.railway.app/pagamento/${dadosDoLocalStorage.idUsuario}`,
         {
           transaction_ref: "EyazsImperium",
           msisdn: `258${numero}`,
@@ -49,7 +49,7 @@ export default function PagamentoViaMpesa() {
   async function mostrarPlano() {
     try {
       const dadosDoLocalStorage = JSON.parse(localStorage.getItem("usuario"));
-      const dadosAtuais = await axios.get(`http://localhost:8000/usuario/${dadosDoLocalStorage.idUsuario}`)
+      const dadosAtuais = await axios.get(`https://api-eyazs-production.up.railway.app/usuario/${dadosDoLocalStorage.idUsuario}`)
       if (dadosDoLocalStorage.profile === "PLANO-6Mbps") {
         setPreco(2320);
       } else if (dadosDoLocalStorage.profile === "PLANO-8Mbps") {

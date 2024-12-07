@@ -10,7 +10,7 @@ export default function HistoricoPagammento() {
 
   async function mostrarRecibos() {
     try {
-      const dadosRecibo = await axios.get("http://localhost:8000/recibos");
+      const dadosRecibo = await axios.get("https://api-eyazs-production.up.railway.app/recibos");
       if (dadosRecibo) {
         setRecibos(dadosRecibo.data);
       }

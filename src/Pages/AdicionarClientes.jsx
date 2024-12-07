@@ -19,7 +19,7 @@ export default function AdicionarClientes() {
 
   async function adicionarDadosCliente() {
     try {
-      const inserirDados = await axios.post("http://localhost:8000/detalhe", {
+      const inserirDados = await axios.post("https://api-eyazs-production.up.railway.app/detalhe", {
         idUsuario: id,
         nome: nome,
         contacto: contacto,

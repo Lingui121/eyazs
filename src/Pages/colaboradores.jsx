@@ -13,7 +13,7 @@ export default function Colaboradores() {
 
   async function mostrarColaboradores() {
     try {
-      const dados = await axios.get("http://localhost:8000/usuariosids");
+      const dados = await axios.get("https://api-eyazs-production.up.railway.app/usuariosids");
       if (dados) {
         setColaboradores(dados.data);
       }
@@ -24,7 +24,7 @@ export default function Colaboradores() {
 
   async function habilitarColaborador(id) {
     try {
-      const dados = await axios.get(`http://localhost:8000/habilitar/${id}`);
+      const dados = await axios.get(`https://api-eyazs-production.up.railway.app/habilitar/${id}`);
       if (dados) {
         console.log("Colaborador Habilitado com Sucesso!");
       } else {

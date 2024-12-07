@@ -13,7 +13,7 @@ export default function PlanosEmpresariais() {
 
     async function mostrarCardPlanosEmpresariais() {
         try {
-            const dados = await axios.get("http://localhost:8000/planosempresariais")
+            const dados = await axios.get("https://api-eyazs-production.up.railway.app/planosempresariais")
             if (dados.data) {
                 setPlanoEmpresas([...dados.data])
             }

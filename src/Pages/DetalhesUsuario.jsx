@@ -14,7 +14,7 @@ export default function DetalhesUsuario() {
   async function mostrarDetalhesUsuario() {
     try {
       const dados = await axios.get(
-        `http://localhost:8000/detalheusuario/${id}`
+        `https://api-eyazs-production.up.railway.app/detalheusuario/${id}`
       );
       if (dados) {
         setDetalhe(dados.data);

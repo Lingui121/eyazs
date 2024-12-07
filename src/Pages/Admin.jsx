@@ -13,7 +13,7 @@ export default function Admin() {
 
   async function mostrarColaboradores() {
     try {
-      const dados = await axios.get("http://localhost:8000/usuariosids");
+      const dados = await axios.get("https://api-eyazs-production.up.railway.app/usuariosids");
       if (dados) {
         setColaboradores(dados.data);
       }

@@ -15,7 +15,7 @@ export default function Recibo() {
       const data = gerarDataAtual();
       console.log(data);
       const dataDownload = await axios.put(
-        `http://localhost:8000/recibo/${id}`,
+        `https://api-eyazs-production.up.railway.app/recibo/${id}`,
         {
           dataDownload: data,
         }
@@ -61,7 +61,7 @@ export default function Recibo() {
 
   async function mostrarRecibo() {
     try {
-      const dadosRecibo = await axios.get(`http://localhost:8000/recibo/${id}`);
+      const dadosRecibo = await axios.get(`https://api-eyazs-production.up.railway.app/recibo/${id}`);
       if (dadosRecibo) {
         setRecibo(dadosRecibo.data);
         const dataTransacao = new Date(dadosRecibo.data.dataTransacao);

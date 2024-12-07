@@ -10,7 +10,7 @@ export default function PlanosResidenciais() {
   async function mostrarCards() {
     try {
       const planosresidenciais = await axios.get(
-        "http://localhost:8000/planos"
+        "https://api-eyazs-production.up.railway.app/planos"
       );
       if (planosresidenciais.data[0]) {
         setPlanosResidencia([...planosresidenciais.data]);

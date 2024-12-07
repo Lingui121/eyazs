@@ -21,7 +21,7 @@ export default function PagamentoResidencia() {
 
   async function mostrar() {
     try {
-      const dados = await axios.get(`http://localhost:8000/planoempresa/${id}`);
+      const dados = await axios.get(`https://api-eyazs-production.up.railway.app/planoempresa/${id}`);
       setProfile(dados.data.plano)
       setPreco(dados.data.preco)
       setPlano(dados.data)
@@ -48,7 +48,7 @@ export default function PagamentoResidencia() {
         return;
       }  
       const dados = await axios.put(
-        `http://localhost:8000/pagamento/${dadosDoLocalStorage.idUsuario}`,
+        `https://api-eyazs-production.up.railway.app/pagamento/${dadosDoLocalStorage.idUsuario}`,
         {
           transaction_ref: "EyazsImperium",
           msisdn: `258${numeroMpesa}`,
@@ -59,14 +59,14 @@ export default function PagamentoResidencia() {
       if (dados) {
         console.log("Pagamento realizado");
         try{
-          const atualizarPlano = await axios.put(`http://localhost:8000/atualizarMikrotik/${dadosDoLocalStorage.idUsuario}`,
+          const atualizarPlano = await axios.put(`https://api-eyazs-production.up.railway.app/atualizarMikrotik/${dadosDoLocalStorage.idUsuario}`,
             {
               profile:profile
             }
           )
           if(atualizarPlano){
             console.log("plano atualizado!")
-            const atualPrecoUsuario = await axios.put(`http://localhost:8000/usuario/${dadosDoLocalStorage.idUsuario}`,
+            const atualPrecoUsuario = await axios.put(`https://api-eyazs-production.up.railway.app/usuario/${dadosDoLocalStorage.idUsuario}`,
               {
                 precousuario:parseFloat(preco),
                 profileusuario:profile
@@ -75,7 +75,7 @@ export default function PagamentoResidencia() {
             if(atualPrecoUsuario){
               console.log("Preco do usuario Atualizado com Sucesso!")
               try{
-                const gerarRecibo = await axios.post("http://localhost:8000/recibo",
+                const gerarRecibo = await axios.post("https://api-eyazs-production.up.railway.app/recibo",
                   
                    {
                       idUsuario: dadosDoLocalStorage.idUsuario,
@@ -225,7 +225,9 @@ export default function PagamentoResidencia() {
     </div>
     <InputPagamento {...propsInputPagamentoMpesa} />
     <button
-      onClick={recarregarPacote}
+      onClick={() => {
+        recarregarPacote()
+      }}
       className="w-full mt-4 bg-blue-500 p-2 text-white rounded-lg"
     >
       Pagar

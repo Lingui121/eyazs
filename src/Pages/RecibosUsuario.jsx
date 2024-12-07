@@ -12,8 +12,8 @@ export default function RecibosUsuario() {
 
   async function mostrarRecibos() {
     try {
-      const dadosUsuario = await axios.get(`http://localhost:8000/usuario/${id}`)
-      const dadosRecibo = await axios.get(`http://localhost:8000/recibos/${id}`);
+      const dadosUsuario = await axios.get(`https://api-eyazs-production.up.railway.app/usuario/${id}`)
+      const dadosRecibo = await axios.get(`https://api-eyazs-production.up.railway.app/recibos/${id}`);
       if ( dadosUsuario && dadosRecibo) {
         setRecibos(dadosRecibo.data);
         setUsuario(dadosUsuario.data.name)
